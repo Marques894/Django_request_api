@@ -1,13 +1,13 @@
-from django.http import HttpResponse
 import requests
-
-# Create your views here.
+from django.shortcuts import render
 
 def do_a_request():
-    URL = "https://api.adviceslip.com/advice"
+    URL = 'https://api.chucknorris.io/jokes/random'
     req = requests.get(URL)
-    response = req.json()
-    return response["slip"]["advice"]
+    dados_recebidos = req.json()
+    return dados_recebidos
 
-def chucknurris(request):
-    return HttpResponse(do_a_request())
+# Create your views here.
+def chuck(request):
+    response = do_a_request()
+    return render(request, 'chucknorris.html', response)
